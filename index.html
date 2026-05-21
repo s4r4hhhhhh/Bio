@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biologie & Physiopathologie ST2S — 1ère & Terminale</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,600;1,400&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rose-pale:       #fce8f0;
+    --rose-clair:      #f7cfe0;
+    --mauve-doux:      #d98bb0;
+    --violet:          #8b3a7a;
+    --violet-fonce:    #5c1a5c;
+    --bordeaux:        #6b1a3a;
+    --bordeaux-clair:  #9b2c5a;
+    --or:              #c9956e;
+    --blanc:           #fff8fb;
+    --texte:           #2a0a1a;
+    --texte-doux:      #5a2a3a;
+    --gradient-bg: linear-gradient(135deg, #fce8f0 0%, #f0d0e8 30%, #e8c0de 60%, #daaed4 100%);
+    --gradient-header: linear-gradient(135deg, #6b1a3a 0%, #8b3a7a 40%, #5c1a5c 100%);
+    --gradient-card: linear-gradient(145deg, rgba(255,248,251,0.92) 0%, rgba(252,232,240,0.85) 100%);
+    --shadow: 0 8px 32px rgba(107,26,58,0.15), 0 2px 8px rgba(139,58,122,0.10);
+    --shadow-hover: 0 16px 48px rgba(107,26,58,0.22), 0 4px 16px rgba(139,58,122,0.18);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Lora', Georgia, serif;
+    background: var(--gradient-bg);
+    min-height: 100vh;
+    color: var(--texte);
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  /* ─── NOISE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0; opacity: 0.5;
+  }
+
+  /* ─── HEADER ─── */
+  header {
+    background: var(--gradient-header);
+    color: var(--blanc);
+    text-align: center;
+    padding: 3rem 2rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 32px rgba(92,26,92,0.35);
+  }
+  header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 20% 50%, rgba(217,139,176,0.25) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(201,149,110,0.15) 0%, transparent 50%);
+  }
+  header::after {
+    content: '🌸 ✦ 🌸 ✦ 🌸';
+    position: absolute; bottom: 0.5rem; width: 100%;
+    text-align: center; font-size: 0.85rem; opacity: 0.35; letter-spacing: 0.5rem;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    position: relative;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+  header .subtitle {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    margin-top: 0.6rem;
+    opacity: 0.88;
+    position: relative;
+  }
+  .badge-row {
+    display: flex; gap: 1rem; justify-content: center; margin-top: 1.2rem; flex-wrap: wrap;
+    position: relative;
+  }
+  .badge {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 999px;
+    padding: 0.3rem 1rem;
+    font-size: 0.82rem;
+    font-family: 'Fira Code', monospace;
+    backdrop-filter: blur(4px);
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(107,26,58,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(217,139,176,0.3);
+    padding: 0.6rem 1rem;
+    display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center;
+  }
+  nav a {
+    color: #f7cfe0;
+    text-decoration: none;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.78rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid rgba(217,139,176,0.25);
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  nav a:hover { background: rgba(217,139,176,0.3); color: #fff8fb; }
+
+  /* ─── MAIN ─── */
+  main { max-width: 1100px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; position: relative; z-index: 1; }
+
+  /* ─── LEVEL BADGES ─── */
+  .level-1ere {
+    display: inline-block;
+    background: linear-gradient(90deg, #9b2c5a, #d98bb0);
+    color: white; font-size: 0.7rem; font-family: 'Fira Code', monospace;
+    padding: 0.15rem 0.6rem; border-radius: 999px; margin-left: 0.5rem;
+    vertical-align: middle; letter-spacing: 0.03em;
+  }
+  .level-term {
+    display: inline-block;
+    background: linear-gradient(90deg, #5c1a5c, #8b3a7a);
+    color: white; font-size: 0.7rem; font-family: 'Fira Code', monospace;
+    padding: 0.15rem 0.6rem; border-radius: 999px; margin-left: 0.5rem;
+    vertical-align: middle; letter-spacing: 0.03em;
+  }
+  .level-both {
+    display: inline-block;
+    background: linear-gradient(90deg, #6b1a3a, #5c1a5c);
+    color: white; font-size: 0.7rem; font-family: 'Fira Code', monospace;
+    padding: 0.15rem 0.6rem; border-radius: 999px; margin-left: 0.5rem;
+    vertical-align: middle;
+  }
+
+  /* ─── SECTIONS ─── */
+  section {
+    background: var(--gradient-card);
+    border: 1px solid rgba(217,139,176,0.35);
+    border-radius: 20px;
+    padding: 2rem 2rem 2rem;
+    margin-bottom: 2.5rem;
+    box-shadow: var(--shadow);
+    transition: box-shadow 0.3s;
+    backdrop-filter: blur(6px);
+  }
+  section:hover { box-shadow: var(--shadow-hover); }
+
+  section > h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.55rem;
+    color: var(--bordeaux);
+    border-bottom: 2px solid var(--mauve-doux);
+    padding-bottom: 0.6rem;
+    margin-bottom: 1.4rem;
+    display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;
+  }
+  section > h2 .icon { font-size: 1.3rem; }
+
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--violet);
+    margin: 1.4rem 0 0.6rem;
+  }
+  h4 {
+    font-family: 'Lora', serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--bordeaux-clair);
+    margin: 1rem 0 0.4rem;
+  }
+
+  p { margin-bottom: 0.7rem; color: var(--texte-doux); }
+  strong { color: var(--bordeaux); }
+  em { color: var(--violet); }
+
+  /* ─── DEFINITION BOX ─── */
+  .def {
+    background: linear-gradient(135deg, rgba(139,58,122,0.08), rgba(107,26,58,0.05));
+    border-left: 4px solid var(--mauve-doux);
+    border-radius: 0 12px 12px 0;
+    padding: 0.8rem 1.1rem;
+    margin: 0.7rem 0;
+    font-style: italic;
+  }
+  .def strong { color: var(--violet-fonce); font-style: normal; }
+
+  /* ─── MNEMONIC ─── */
+  .mnemo {
+    background: linear-gradient(135deg, rgba(201,149,110,0.15), rgba(217,139,176,0.12));
+    border: 1.5px dashed var(--or);
+    border-radius: 14px;
+    padding: 0.9rem 1.2rem;
+    margin: 0.9rem 0;
+  }
+  .mnemo::before {
+    content: '💡 Moyen mnémotechnique';
+    display: block;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.75rem;
+    color: var(--or);
+    font-style: normal;
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.05em;
+  }
+  .mnemo p { color: var(--texte); margin: 0; }
+  .mnemo .acro {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9rem;
+    color: var(--bordeaux);
+    font-weight: 600;
+    background: rgba(107,26,58,0.08);
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+  }
+
+  /* ─── SCHEMA ─── */
+  .schema {
+    background: rgba(92,26,92,0.05);
+    border: 1px solid rgba(139,58,122,0.2);
+    border-radius: 12px;
+    padding: 1rem 1.4rem;
+    margin: 0.9rem 0;
+    overflow-x: auto;
+  }
+  .schema::before {
+    content: '📊 Schéma';
+    display: block;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.72rem;
+    color: var(--violet);
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.06em;
+  }
+  .schema pre {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.78rem;
+    line-height: 1.55;
+    color: var(--texte);
+    white-space: pre;
+  }
+
+  /* ─── TABLE ─── */
+  .table-wrap { overflow-x: auto; margin: 0.9rem 0; }
+  table {
+    width: 100%; border-collapse: collapse;
+    font-size: 0.87rem;
+    border-radius: 10px; overflow: hidden;
+  }
+  th {
+    background: linear-gradient(90deg, var(--bordeaux), var(--violet));
+    color: white;
+    padding: 0.6rem 0.9rem;
+    text-align: left;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+  }
+  td {
+    padding: 0.55rem 0.9rem;
+    border-bottom: 1px solid rgba(217,139,176,0.25);
+    color: var(--texte-doux);
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background: rgba(217,139,176,0.08); }
+  tr:hover td { background: rgba(217,139,176,0.18); }
+
+  /* ─── TAGS ─── */
+  .tag {
+    display: inline-block;
+    padding: 0.15rem 0.55rem;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-family: 'Fira Code', monospace;
+    margin: 0.1rem;
+  }
+  .tag-rose { background: rgba(217,139,176,0.25); color: var(--bordeaux); }
+  .tag-violet { background: rgba(139,58,122,0.15); color: var(--violet-fonce); }
+  .tag-or { background: rgba(201,149,110,0.2); color: #7a4a20; }
+
+  /* ─── ALERT / KEY POINT ─── */
+  .key {
+    background: linear-gradient(135deg, rgba(107,26,58,0.1), rgba(139,58,122,0.07));
+    border: 1.5px solid var(--bordeaux-clair);
+    border-radius: 12px;
+    padding: 0.8rem 1.1rem;
+    margin: 0.8rem 0;
+  }
+  .key::before {
+    content: '⭐ Point clé';
+    display: block;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.72rem;
+    color: var(--bordeaux);
+    margin-bottom: 0.3rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* ─── LIST ─── */
+  ul, ol { padding-left: 1.4rem; margin: 0.5rem 0 0.8rem; color: var(--texte-doux); }
+  li { margin-bottom: 0.3rem; }
+  li::marker { color: var(--mauve-doux); }
+
+  /* ─── GRID ─── */
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; margin: 1rem 0; }
+  .mini-card {
+    background: rgba(255,248,251,0.7);
+    border: 1px solid rgba(217,139,176,0.3);
+    border-radius: 14px;
+    padding: 1rem 1.1rem;
+    box-shadow: 0 2px 8px rgba(107,26,58,0.08);
+  }
+  .mini-card h4 { margin-top: 0; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    background: var(--gradient-header);
+    color: rgba(247,207,224,0.8);
+    font-size: 0.82rem;
+    font-family: 'Fira Code', monospace;
+    position: relative; z-index: 1;
+  }
+  footer span { color: var(--mauve-doux); }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+  section { animation: fadeUp 0.5s ease both; }
+  section:nth-child(2) { animation-delay: 0.05s; }
+  section:nth-child(3) { animation-delay: 0.10s; }
+  section:nth-child(4) { animation-delay: 0.15s; }
+  section:nth-child(5) { animation-delay: 0.20s; }
+  section:nth-child(n+6) { animation-delay: 0.25s; }
+
+  @media (max-width: 640px) {
+    main { padding: 1.2rem 0.9rem 3rem; }
+    section { padding: 1.3rem 1.1rem; }
+    header { padding: 2rem 1rem 1.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🧬 Biologie &amp; Physiopathologie Humaine</h1>
+  <p class="subtitle">Sciences et Technologies de la Santé et du Social — Programme complet</p>
+  <div class="badge-row">
+    <span class="badge">1ère ST2S</span>
+    <span class="badge">Terminale ST2S</span>
+    <span class="badge">Révisions · Schémas · Mnémotechniques</span>
+  </div>
+</header>
+
+<nav>
+  <a href="#cellule">🔬 Cellule</a>
+  <a href="#tissu">🧫 Tissus</a>
+  <a href="#sang">🩸 Sang</a>
+  <a href="#immuno">🛡️ Immunité</a>
+  <a href="#cardio">❤️ Cardio</a>
+  <a href="#respiration">🫁 Respiration</a>
+  <a href="#digestion">🍽️ Digestion</a>
+  <a href="#neuro">🧠 Neuro</a>
+  <a href="#endocrino">⚗️ Endocrino</a>
+  <a href="#repro">🌱 Repro</a>
+  <a href="#renal">💧 Rénal</a>
+  <a href="#os">🦴 Os & Muscles</a>
+  <a href="#patho">⚠️ Pathologies</a>
+</nav>
+
+<main>
+
+<!-- ═══════════════════════════════════════════════
+     1. LA CELLULE
+════════════════════════════════════════════════ -->
+<section id="cellule">
+  <h2><span class="icon">🔬</span> La Cellule — Unité du Vivant <span class="level-both">1ère + Term.</span></h2>
+
+  <div class="def">
+    <strong>Cellule :</strong> unité structurale et fonctionnelle de tout être vivant. Elle est délimitée par une membrane plasmique et contient le matériel génétique (ADN).
+  </div>
+
+  <h3>Structure d'une cellule eucaryote</h3>
+  <div class="schema">
+    <pre>
+┌─────────────────────────────────────────────────────────────┐
+│                    CELLULE EUCARYOTE                        │
+│                                                             │
+│  ╔═══════════════╗    ┌─────────────────────────────────┐  │
+│  ║   NOYAU       ║    │         CYTOPLASME              │  │
+│  ║  ┌─────────┐  ║    │  ┌──────────┐  ┌────────────┐   │  │
+│  ║  │Nucléole │  ║    │  │Mitochon- │  │ Réticulum  │   │  │
+│  ║  └─────────┘  ║    │  │  drie    │  │endoplasm.  │   │  │
+│  ║   ADN (chromo)║    │  └──────────┘  └────────────┘   │  │
+│  ╚═══════════════╝    │  ┌──────────┐  ┌────────────┐   │  │
+│                       │  │ Appareil │  │ Lysosomes  │   │  │
+│  Membrane plasmique ──│  │  Golgi   │  │            │   │  │
+│  (bicouche lipidique) │  └──────────┘  └────────────┘   │  │
+└─────────────────────────────────────────────────────────────┘
+    </pre>
+  </div>
+
+  <div class="grid-2">
+    <div class="mini-card">
+      <h4>Organites et rôles</h4>
+      <ul>
+        <li><strong>Noyau</strong> → contient ADN, centre de commande</li>
+        <li><strong>Mitochondrie</strong> → respiration cellulaire, ATP</li>
+        <li><strong>Ribosome</strong> → synthèse des protéines</li>
+        <li><strong>RE rugueux</strong> → maturation protéines</li>
+        <li><strong>Golgi</strong> → tri et export des protéines</li>
+        <li><strong>Lysosome</strong> → digestion intracellulaire</li>
+      </ul>
+    </div>
+    <div class="mini-card">
+      <h4>Membrane plasmique</h4>
+      <ul>
+        <li><strong>Bicouche phospholipidique</strong></li>
+        <li>Protéines intégrées (récepteurs, canaux)</li>
+        <li>Rôle : échanges sélectifs, communication</li>
+        <li>Transport actif (ATP) ↔ passif (gradient)</li>
+        <li>Cholestérol → fluidité membranaire</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="mnemo">
+    <p>Pour retenir les organites : <span class="acro">«&nbsp;Nathalie Mange Raisins Rouges, Grosse Légèreté&nbsp;»</span><br>
+    → <strong>N</strong>oyau · <strong>M</strong>itochondrie · <strong>R</strong>ibosome · <strong>R</strong>E · <strong>G</strong>olgi · <strong>L</strong>ysosome</p>
+  </div>
+
+  <h3>Division cellulaire <span class="level-1ere">1ère</span></h3>
+
+  <div class="schema">
+    <pre>
+MITOSE (cellules somatiques) :
+G1 ──→ S ──→ G2 ──→ M ──→ 2 cellules filles identiques (2n)
+(croiss.) (repl.ADN) (prép.) (division)
+
+MÉIOSE (cellules reproductrices) :
+1 cellule (2n) ──→ 4 gamètes (n) haploïdes
+    Méiose I (réductionnelle) → Méiose II (équationnelle)
+    </pre>
+  </div>
+
+  <div class="mnemo">
+    <p>Phases de la mitose : <span class="acro">« PMAT »</span><br>
+    → <strong>P</strong>rophase → <strong>M</strong>étaphase → <strong>A</strong>naphase → <strong>T</strong>élophase</p>
+  </div>
+
+  <h3>ADN et information génétique <span class="level-1ere">1ère</span></h3>
+  <div class="def">
+    <strong>ADN</strong> (Acide DésoxyriboNucléique) : double hélice de nucléotides (A-T, G-C). Porte le code génétique. Un gène = séquence d'ADN codant une protéine.
+  </div>
+  <div class="def">
+    <strong>ARNm</strong> : copie d'un gène, transporté dans le cytoplasme → traduction en protéine par les ribosomes.
+  </div>
+
+  <div class="schema">
+    <pre>
+Transcription           Traduction
+ADN ──────────→ ARNm ─────────────→ Protéine
+    (dans noyau)      (ribosomes)
+    </pre>
+  </div>
+
+  <div class="key">
+    <p>Mutation = modification de la séquence d'ADN. Peut être silencieuse, faux-sens ou non-sens. Les mutations peuvent être à l'origine de maladies génétiques ou de cancers.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     2. ORGANISATION DES TISSUS
+════════════════════════════════════════════════ -->
+<section id="tissu">
+  <h2><span class="icon">🧫</span> Organisation des Tissus <span class="level-1ere">1ère</span></h2>
+
+  <div class="def">
+    <strong>Tissu :</strong> ensemble de cellules de même type, associées et spécialisées pour une même fonction. Les tissus s'organisent en organes, puis en systèmes.
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <tr><th>Tissu</th><th>Localisation principale</th><th>Fonction</th></tr>
+      <tr><td><strong>Épithélial</strong></td><td>Peau, muqueuses, glandes</td><td>Protection, absorption, sécrétion</td></tr>
+      <tr><td><strong>Conjonctif</strong></td><td>Partout (matrice extracellulaire)</td><td>Soutien, liaison, nutrition</td></tr>
+      <tr><td><strong>Musculaire</strong></td><td>Muscles squelettiques, cœur, viscères</td><td>Contraction, mouvement</td></tr>
+      <tr><td><strong>Nerveux</strong></td><td>Cerveau, moelle, nerfs</td><td>Conduction influx nerveux</td></tr>
+      <tr><td><strong>Sanguin</strong></td><td>Vaisseaux, moelle osseuse</td><td>Transport, défense</td></tr>
+    </table>
+  </div>
+
+  <div class="mnemo">
+    <p>Les 4 types fondamentaux : <span class="acro">« ÉCMN »</span><br>
+    → <strong>É</strong>pithélial · <strong>C</strong>onjonctif · <strong>M</strong>usculaire · <strong>N</strong>erveux<br>
+    <em>«&nbsp;Éléphants Courent Mais Nonchalamment&nbsp;»</em></p>
+  </div>
+
+  <h3>Niveaux d'organisation</h3>
+  <div class="schema">
+    <pre>
+Atome → Molécule → Organite → Cellule → Tissu → Organe → Système → Organisme
+
+Ex. cœur :
+  Cellules musculaires cardiaques (cardiomyocytes)
+     → Tissu musculaire cardiaque
+        → Organe : cœur
+           → Système cardiovasculaire
+    </pre>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     3. LE SANG ET L'HÉMATOPOÏÈSE
+════════════════════════════════════════════════ -->
+<section id="sang">
+  <h2><span class="icon">🩸</span> Le Sang et l'Hématopoïèse <span class="level-both">1ère + Term.</span></h2>
+
+  <div class="def">
+    <strong>Sang :</strong> tissu conjonctif liquide composé de plasma (55 %) et d'éléments figurés (45 %). Volume total : environ 5 litres chez l'adulte.
+  </div>
+
+  <div class="schema">
+    <pre>
+COMPOSITION DU SANG
+┌─────────────────────────────────────────────────────┐
+│  PLASMA (55 %)                                      │
+│  ├── Eau (90 %)                                     │
+│  ├── Protéines (albumine, fibrinogène, globulines)  │
+│  └── Substances dissoutes (glucose, ions, hormones) │
+│                                                     │
+│  ÉLÉMENTS FIGURÉS (45 %)                            │
+│  ├── 🔴 Érythrocytes (hématies) : 4,5–5 M/mm³      │
+│  │      → Transport O₂ / CO₂ (hémoglobine)         │
+│  ├── ⚪ Leucocytes (GB)  : 4 000–10 000/mm³         │
+│  │      → Défense immunitaire                       │
+│  └── 🟡 Plaquettes (thrombocytes) : 150–400 k/mm³  │
+│         → Hémostase et coagulation                  │
+└─────────────────────────────────────────────────────┘
+    </pre>
+  </div>
+
+  <h3>Hématopoïèse <span class="level-1ere">1ère</span></h3>
+  <div class="def">
+    <strong>Hématopoïèse :</strong> fabrication de toutes les cellules sanguines à partir de cellules souches hématopoïétiques (CSH) dans la moelle osseuse rouge.
+  </div>
+
+  <div class="schema">
+    <pre>
+                    CELLULE SOUCHE HÉMATOPOÏÉTIQUE (CSH)
+                              │
+              ┌───────────────┴───────────────┐
+        Lignée myéloïde               Lignée lymphoïde
+              │                              │
+    ┌─────────┼────────┐            ┌────────┴────────┐
+    ↓         ↓        ↓            ↓                 ↓
+ Érythro-  Granulo-  Plaquettes  Lympho B         Lympho T
+ cytes     cytes               (anticorps)      (immunité cell.)
+ (hématies) (PNN, éosinophiles,
+             basophiles, monocytes)
+    </pre>
+  </div>
+
+  <h3>Groupes sanguins <span class="level-1ere">1ère</span></h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Groupe</th><th>Antigènes (GR)</th><th>Anticorps (plasma)</th><th>Donneurs compatibles</th></tr>
+      <tr><td>A</td><td>A</td><td>anti-B</td><td>A, O</td></tr>
+      <tr><td>B</td><td>B</td><td>anti-A</td><td>B, O</td></tr>
+      <tr><td>AB</td><td>A et B</td><td>aucun</td><td>A, B, AB, O (receveur universel)</td></tr>
+      <tr><td>O</td><td>aucun</td><td>anti-A et anti-B</td><td>O seulement (donneur universel)</td></tr>
+    </table>
+  </div>
+
+  <div class="mnemo">
+    <p><span class="acro">Rhésus (+/-)</span> : présence (+) ou absence (-) de l'antigène D à la surface des GR.<br>
+    Règle de transfusion : <em>«&nbsp;On ne donne jamais un antigène que le receveur ne possède pas&nbsp;»</em></p>
+  </div>
+
+  <h3>Hémostase et coagulation <span class="level-term">Terminale</span></h3>
+  <div class="schema">
+    <pre>
+HÉMOSTASE PRIMAIRE          COAGULATION
+Lésion vasculaire            (cascade enzymatique)
+     │                             │
+Vasoconstriction           Voie extrinsèque + voie intrinsèque
+     │                             │
+Adhésion plaquettes         Formation de Thrombine
+     │                             │
+Agrégation → Clou           Fibrinogène → Fibrine
+plaquettaire                         │
+                              Caillot stable (thrombus)
+    </pre>
+  </div>
+
+  <div class="key">
+    <p>Facteurs de coagulation numérotés I à XIII. La vitamine K est indispensable à la synthèse des facteurs II, VII, IX, X. Les antivitamines K (AVK) et héparines sont des anticoagulants.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     4. IMMUNITÉ
+════════════════════════════════════════════════ -->
+<section id="immuno">
+  <h2><span class="icon">🛡️</span> Immunité et Défenses de l'Organisme <span class="level-both">1ère + Term.</span></h2>
+
+  <div class="schema">
+    <pre>
+DÉFENSES DE L'ORGANISME
+┌──────────────────────────────────────────────────────────┐
+│   IMMUNITÉ INNÉE (non spécifique) — immédiate            │
+│   ├── Barrières physiques : peau, muqueuses, cils        │
+│   ├── Barrières chimiques : pH acide, lysozyme, mucus    │
+│   ├── Phagocytose : PNN (polynucléaires), macrophages    │
+│   └── Inflammation, fièvre, protéines du complément      │
+├──────────────────────────────────────────────────────────┤
+│   IMMUNITÉ ADAPTATIVE (spécifique) — différée            │
+│   ├── Humorale : Lymphocytes B → Plasmocytes → Ac        │
+│   └── Cellulaire : Lymphocytes T → T cytotoxiques (LTc)  │
+└──────────────────────────────────────────────────────────┘
+    </pre>
+  </div>
+
+  <h3>Phagocytose <span class="level-1ere">1ère</span></h3>
+  <div class="schema">
+    <pre>
+Bactérie ──→ Chimiotactisme ──→ Adhésion ──→ Ingestion
+                                            (phagosome)
+                                                │
+                               Digestion par enzymes lysosomales
+                                                │
+                                        Élimination déchets
+    </pre>
+  </div>
+
+  <h3>Réponse immunitaire adaptative <span class="level-term">Terminale</span></h3>
+  <div class="schema">
+    <pre>
+ANTIGÈNE (Ag) pénètre l'organisme
+       │
+       ▼
+Cellule présentatrice d'Ag (CPA) → macrophage, cellule dendritique
+       │
+       ▼
+Présentation de l'Ag sur CMH (complexe majeur d'histocompatibilité)
+       │
+  ┌────┴────┐
+  ▼         ▼
+LT CD4+   LT CD8+
+(auxiliaire)(cytotoxique)
+  │         │
+  │ IL-2,   │ Lyse des cellules infectées
+  │ cytokines│
+  ▼         │
+LB → Plasmocytes → Anticorps (immunoglobulines Ig)
+  │
+  └──→ Lymphocytes mémoire (immunité durable)
+    </pre>
+  </div>
+
+  <div class="def">
+    <strong>Anticorps (immunoglobuline) :</strong> protéine en Y produite par les plasmocytes. Se fixe spécifiquement sur un antigène (complémentarité de forme). → Neutralisation, opsonisation, activation du complément.
+  </div>
+
+  <h3>Vaccination et sérothérapie <span class="level-term">Terminale</span></h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th></th><th>Vaccination</th><th>Sérothérapie</th></tr>
+      <tr><td><strong>Principe</strong></td><td>Immunité active (on stimule l'organisme)</td><td>Immunité passive (on donne des Ac)</td></tr>
+      <tr><td><strong>Délai</strong></td><td>Plusieurs semaines</td><td>Immédiat</td></tr>
+      <tr><td><strong>Durée</strong></td><td>Longue (mémoire immunitaire)</td><td>Courte (quelques semaines)</td></tr>
+      <tr><td><strong>Ex.</strong></td><td>ROR, DTP, COVID-19</td><td>Anti-tétanique, anti-venin</td></tr>
+    </table>
+  </div>
+
+  <div class="mnemo">
+    <p><span class="acro">«&nbsp;V comme Vigil, S comme Sous-traitant&nbsp;»</span><br>
+    Vaccination = l'organisme est <strong>Vigil</strong>ant (il apprend lui-même).<br>
+    Sérothérapie = l'organisme est <strong>S</strong>econdé (les Ac viennent de l'extérieur).</p>
+  </div>
+
+  <h3>Hypersensibilités et allergies <span class="level-term">Terminale</span></h3>
+  <div class="def">
+    <strong>Allergie :</strong> réponse immune exagérée à un antigène normalement inoffensif (allergène). Implique des IgE fixées sur les mastocytes → libération d'histamine.
+  </div>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Type</th><th>Mécanisme</th><th>Exemple</th></tr>
+      <tr><td>I (immédiate)</td><td>IgE + mastocytes → histamine</td><td>Rhinite allergique, anaphylaxie</td></tr>
+      <tr><td>II (cytotoxique)</td><td>IgG + Ag cellulaires → lyse</td><td>Incompatibilité transfusionnelle</td></tr>
+      <tr><td>III (complexes immuns)</td><td>Dépôts Ag-Ac → inflammation</td><td>Maladie sérique</td></tr>
+      <tr><td>IV (retardée)</td><td>LT → inflammation (48-72 h)</td><td>Test tuberculine, dermite contact</td></tr>
+    </table>
+  </div>
+
+  <h3>Maladies auto-immunes <span class="level-term">Terminale</span></h3>
+  <div class="def">
+    <strong>Auto-immunité :</strong> perte de tolérance au soi → le système immunitaire attaque les propres cellules de l'organisme.
+    Exemples : lupus érythémateux, polyarthrite rhumatoïde, diabète de type 1, sclérose en plaques.
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     5. SYSTÈME CARDIOVASCULAIRE
+════════════════════════════════════════════════ -->
+<section id="cardio">
+  <h2><span class="icon">❤️</span> Système Cardiovasculaire <span class="level-both">1ère + Term.</span></h2>
+
+  <h3>Structure du cœur <span class="level-1ere">1ère</span></h3>
+  <div class="schema">
+    <pre>
+               CŒUR (vue antérieure schématique)
+         ┌──────────────────────────────────────┐
+         │  OD ──────────→ VD ──────────────────┤──→ Artère pulmonaire
+         │  (oreillette D)  (ventricule D)       │    → Poumons
+         │                                       │
+         │  OG ←──────────── VG ─────────────────┤← Veines pulmonaires
+         │  (oreillette G)   (ventricule G)       │
+         └───────────────────────────────────────┘
+                                 │
+                                 ▼
+                         Aorte → Grande circulation
+
+Valves :  Tricuspide (OD/VD) · Pulmonaire (VD/art. pulm.)
+          Mitrale (OG/VG)   · Aortique (VG/aorte)
+    </pre>
+  </div>
+
+  <div class="mnemo">
+    <p>Valves cardiaques gauches : <span class="acro">«&nbsp;M avant A&nbsp;»</span> → <strong>M</strong>itrale (auriculo-ventriculaire) puis <strong>A</strong>ortique (sigmoïde).<br>
+    Droites : <span class="acro">«&nbsp;T avant P&nbsp;»</span> → <strong>T</strong>ricuspide puis <strong>P</strong>ulmonaire.</p>
+  </div>
+
+  <h3>Révolution cardiaque <span class="level-1ere">1ère</span></h3>
+  <div class="schema">
+    <pre>
+Systole auriculaire (0,1 s)
+  → Systole ventriculaire (0,3 s)  → Éjection du sang
+    → Diastole générale (0,4 s)    → Remplissage
+
+FC normale repos : 60–80 bpm
+Volume d'éjection systolique (VES) : ~70 mL
+Débit cardiaque = FC × VES  [ex. 70 × 70 = 4 900 mL/min ≈ 5 L/min]
+    </pre>
+  </div>
+
+  <h3>Circulation double <span class="level-1ere">1ère</span></h3>
+  <div class="schema">
+    <pre>
+PETITE CIRCULATION (pulmonaire) :
+VD → Art. pulm. → Poumons (hématose) → Veines pulm. → OG
+
+GRANDE CIRCULATION (systémique) :
+VG → Aorte → Organes → Veines caves → OD
+
+⚠️  Les deux circulations sont en série (pas en parallèle l'une de l'autre)
+    </pre>
+  </div>
+
+  <h3>Vaisseaux sanguins</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Vaisseau</th><th>Paroi</th><th>Sens du flux</th><th>Pression</th></tr>
+      <tr><td>Artères</td><td>Épaisse, élastique, musculeuse</td><td>Cœur → organes</td><td>Élevée</td></tr>
+      <tr><td>Artérioles</td><td>Musculeuse prédominante</td><td>→ capillaires</td><td>Régule résistances</td></tr>
+      <tr><td>Capillaires</td><td>1 cellule épaisseur (endothélium)</td><td>Échanges avec tissus</td><td>Basse</td></tr>
+      <tr><td>Veinules</td><td>Fine</td><td>Tissus → cœur</td><td>Très basse</td></tr>
+      <tr><td>Veines</td><td>Fine, valvules anti-reflux</td><td>→ cœur</td><td>Basse</td></tr>
+    </table>
+  </div>
+
+  <h3>Pression artérielle <span class="level-term">Terminale</span></h3>
+  <div class="def">
+    <strong>PA = DC × RPT</strong> (débit cardiaque × résistances périphériques totales)<br>
+    Normale : 120/80 mmHg (systolique/diastolique).<br>
+    <strong>Hypertension artérielle (HTA)</strong> : PA ≥ 140/90 mmHg de façon persistante.
+  </div>
+
+  <div class="key">
+    <p>L'HTA est un facteur de risque cardiovasculaire majeur → AVC, infarctus, insuffisance rénale. Prise en charge : hygiène de vie + antihypertenseurs (IEC, sartans, bêta-bloquants, diurétiques, inhibiteurs calciques).</p>
+  </div>
+
+  <h3>Pathologies cardiovasculaires <span class="level-term">Terminale</span></h3>
+  <div class="grid-2">
+    <div class="mini-card">
+      <h4>Athérosclérose</h4>
+      <ul>
+        <li>Dépôt de plaques lipidiques (athéromes) dans les artères</li>
+        <li>Rétrécissement de la lumière vasculaire</li>
+        <li>FR : HTA, tabac, diabète, dyslipidémie, obésité</li>
+        <li>→ Angor, IDM, AOMI, AVC ischémique</li>
+      </ul>
+    </div>
+    <div class="mini-card">
+      <h4>Infarctus du myocarde (IDM)</h4>
+      <ul>
+        <li>Occlusion coronaire → nécrose myocardique</li>
+        <li>Signes : douleur thoracique irradiant bras G, mâchoire</li>
+        <li>Urgence : thrombolyse ou angioplastie</li>
+        <li>Marqueurs : troponine ↑, CPK-MB ↑</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     6. SYSTÈME RESPIRATOIRE
+════════════════════════════════════════════════ -->
+<section id="respiration">
+  <h2><span class="icon">🫁</span> Système Respiratoire <span class="level-both">1ère + Term.</span></h2>
+
+  <h3>Anatomie des voies respiratoires</h3>
+  <div class="schema">
+    <pre>
+Narines/Bouche
+    │
+Pharynx → Larynx (cordes vocales, épiglotte)
+    │
+Trachée (anneaux cartilagineux)
+    │
+Bronches souches (D et G)
+    │
+Bronchioles
+    │
+Alvéoles pulmonaires ← LIEU DE L'HÉMATOSE
+(300 millions / poumon, Ø ≈ 0,2 mm)
+Surface d'échange totale : ~80–100 m²
+
+La membrane alvéolo-capillaire :
+Alvéole │surfactant│ membrane basale │ capillaire sanguin
+    </pre>
+  </div>
+
+  <h3>Hématose — Échanges gazeux <span class="level-1ere">1ère</span></h3>
+  <div class="def">
+    <strong>Hématose :</strong> enrichissement du sang en O₂ et élimination du CO₂, au niveau des alvéoles, par diffusion selon les gradients de pression partielle.
+  </div>
+  <div class="schema">
+    <pre>
+              Air alvéolaire           Sang veineux (entrant)
+  PO₂  ──→       100 mmHg   >     40 mmHg  ──→ O₂ passe dans le sang
+  PCO₂ ←──        40 mmHg   <     46 mmHg  ←── CO₂ passe dans l'alvéole
+    </pre>
+  </div>
+
+  <h3>Mécanique ventilatoire</h3>
+  <div class="schema">
+    <pre>
+INSPIRATION                     EXPIRATION
+Diaphragme ↓ + intercostaux ↑  Diaphragme ↑ + intercostaux ↓
+→ Volume thoracique ↑           → Volume thoracique ↓
+→ Pression intrathoracique ↓    → Pression intrathoracique ↑
+→ Air entre dans les poumons    → Air sort des poumons
+(Loi de Boyle-Mariotte : P×V = constante)
+    </pre>
+  </div>
+
+  <h3>Volumes et capacités pulmonaires <span class="level-term">Terminale</span></h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Paramètre</th><th>Définition</th><th>Valeur normale</th></tr>
+      <tr><td>VC (volume courant)</td><td>Volume d'un cycle normal</td><td>≈ 500 mL</td></tr>
+      <tr><td>VRI</td><td>Volume de réserve inspiratoire</td><td>≈ 3 000 mL</td></tr>
+      <tr><td>VRE</td><td>Volume de réserve expiratoire</td><td>≈ 1 500 mL</td></tr>
+      <tr><td>VR</td><td>Volume résiduel (toujours dans poumons)</td><td>≈ 1 200 mL</td></tr>
+      <tr><td>CV (VEMS)</td><td>Capacité vitale = VC + VRI + VRE</td><td>≈ 5 000 mL</td></tr>
+      <tr><td>VEMS</td><td>Volume expiré en 1 seconde forcée</td><td>≈ 80 % de CV</td></tr>
+    </table>
+  </div>
+
+  <div class="mnemo">
+    <p>Pour les volumes : <span class="acro">«&nbsp;Viens Rouler I comme E&nbsp;»</span> → <strong>V</strong>C · <strong>R</strong>ésiduel · <strong>I</strong>nspiratoire · <strong>E</strong>xpiratoire</p>
+  </div>
+
+  <h3>Pathologies respiratoires <span class="level-term">Terminale</span></h3>
+  <div class="grid-2">
+    <div class="mini-card">
+      <h4>BPCO</h4>
+      <p>Bronchopneumopathie chronique obstructive. Obstruction bronchique permanente (VEMS/CV &lt; 70 %). Principale cause : tabac. → Emphysème + bronchite chronique.</p>
+    </div>
+    <div class="mini-card">
+      <h4>Asthme</h4>
+      <p>Obstruction réversible des bronches (inflammation + bronchospasme). Crises déclenchées par allergènes, effort, froid. Traitement : bronchodilatateurs (β2-mimétiques), corticoïdes inhalés.</p>
+    </div>
+    <div class="mini-card">
+      <h4>Pneumonie</h4>
+      <p>Infection du parenchyme pulmonaire (bactérie, virus, champignon). Signes : fièvre, toux, dyspnée. Confirmation : radiographie thoracique.</p>
+    </div>
+    <div class="mini-card">
+      <h4>Tuberculose</h4>
+      <p>Infection par <em>Mycobacterium tuberculosis</em>. Transmission aérienne. Diagnostic : IDR, BK crachat, scanner. Traitement : quadrithérapie antituberculeuse.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     7. DIGESTION
+════════════════════════════════════════════════ -->
+<section id="digestion">
+  <h2><span class="icon">🍽️</span> Système Digestif et Nutrition <span class="level-both">1ère + Term.</span></h2>
+
+  <h3>Trajet digestif</h3>
+  <div class="schema">
+    <pre>
+Bouche → Œsophage → Estomac → Intestin grêle → Côlon → Rectum → Anus
+  │           │          │            │
+Mastication  Déglut.  Digestion   Absorption
+Salivation            acide        (nutriments)
+(amylase)            (HCl, pepsine)
+
+Glandes annexes : foie (bile) · pancréas (enzymes + insuline) · vésicule biliaire
+    </pre>
+  </div>
+
+  <h3>Digestion des macronutriments <span class="level-1ere">1ère</span></h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Nutriment</th><th>Enzyme(s)</th><th>Lieu</th><th>Produit final</th></tr>
+      <tr><td>Glucides</td><td>Amylase salivaire / pancréatique, maltase, saccharase</td><td>Bouche, intestin grêle</td><td>Glucose, fructose, galactose</td></tr>
+      <tr><td>Lipides</td><td>Lipases (pancréatique), bile (émulsification)</td><td>Intestin grêle</td><td>Acides gras + glycérol</td></tr>
+      <tr><td>Protéines</td><td>Pepsine (estomac), trypsine, chymotrypsine (pancréas), peptidases</td><td>Estomac, intestin grêle</td><td>Acides aminés</td></tr>
+    </table>
+  </div>
+
+  <div class="mnemo">
+    <p>Enzymes pancréatiques : <span class="acro">«&nbsp;Les Tigres Chassent Parfois&nbsp;»</span><br>
+    → <strong>L</strong>ipase · <strong>T</strong>rypsine · <strong>C</strong>hymotrypsine · <strong>P</strong>hospholipase · (amylase)</p>
+  </div>
+
+  <h3>Absorption intestinale</h3>
+  <div class="def">
+    <strong>Villosités intestinales :</strong> replis de la muqueuse de l'intestin grêle augmentant la surface d'absorption (~200 m²). Chaque entérocyte porte des microvillosités (bordure en brosse).
+    <br>Voie porte : glucose + AA → veine porte → foie.
+    <br>Voie lymphatique : lipides → chylomicrons → lymphe → circulation.
+  </div>
+
+  <h3>Foie — Fonctions <span class="level-term">Terminale</span></h3>
+  <ul>
+    <li>Synthèse des protéines plasmatiques (albumine, facteurs coagulation)</li>
+    <li>Métabolisme glucidique (glycogénogenèse, glycogénolyse, néoglucogenèse)</li>
+    <li>Métabolisme lipidique (bêta-oxydation, synthèse cholestérol)</li>
+    <li>Détoxification (alcool, médicaments, ammoniac → urée)</li>
+    <li>Production de bile (sels biliaires, bilirubine)</li>
+  </ul>
+
+  <h3>Pathologies digestives <span class="level-term">Terminale</span></h3>
+  <div class="grid-2">
+    <div class="mini-card">
+      <h4>Hépatite virale</h4>
+      <p>Inflammation du foie par virus (A, B, C, D, E). Hépatite B et C → risque de cirrhose et cancer hépatocellulaire. Vaccin disponible pour A et B.</p>
+    </div>
+    <div class="mini-card">
+      <h4>Cirrhose</h4>
+      <p>Fibrose irréversible du foie (alcool, hépatite chronique). Complications : hypertension portale, ascite, encéphalopathie hépatique.</p>
+    </div>
+    <div class="mini-card">
+      <h4>MICI (Crohn / RCH)</h4>
+      <p>Maladies inflammatoires chroniques de l'intestin. Crohn : tout le tube digestif (lésions discontinues). RCH : côlon (lésions continues).</p>
+    </div>
+    <div class="mini-card">
+      <h4>Diabète et pancréas</h4>
+      <p>Pancréas endocrine : îlots de Langerhans → insuline (β) et glucagon (α). Pancréatite → insuffisance exocrine (malabsorption) + endocrine (diabète).</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     8. SYSTÈME NERVEUX
+════════════════════════════════════════════════ -->
+<section id="neuro">
+  <h2><span class="icon">🧠</span> Système Nerveux <span class="level-both">1ère + Term.</span></h2>
+
+  <div class="schema">
+    <pre>
+SYSTÈME NERVEUX
+├── SNC (Système Nerveux Central)
+│   ├── Encéphale : cerveau (télencéphale) · cervelet · tronc cérébral
+│   └── Moelle épinière
+│
+└── SNP (Système Nerveux Périphérique)
+    ├── Somatique (volontaire) : nerfs crâniens (12 paires) + rachidiens (31 paires)
+    └── Autonome (végétatif)
+        ├── Sympathique (état d'alerte, adrénaline) → «&nbsp;Fight or Flight&nbsp;»
+        └── Parasympathique (repos, acétylcholine) → «&nbsp;Rest and Digest&nbsp;»
+    </pre>
+  </div>
+
+  <h3>Neurone — Structure et fonctionnement <span class="level-1ere">1ère</span></h3>
+  <div class="schema">
+    <pre>
+           Dendrites (réception)
+               ║║║
+         ┌─────╨──────┐
+         │  CORPS     │← Soma
+         │ CELLULAIRE │
+         └─────╥──────┘
+               ║ Axone (gaine de myéline + nœuds de Ranvier)
+               ║
+           Terminaison axonale
+               │
+          ─────┴─────  SYNAPSE  ─────┬─────
+                                     │
+                              Neurone suivant
+                         (ou cellule effectrice)
+    </pre>
+  </div>
+
+  <div class="def">
+    <strong>Potentiel d'action :</strong> signal électrique tout-ou-rien se propageant le long de l'axone (dépolarisation : entrée Na⁺ ; repolarisation : sortie K⁺). Vitesse ↑ avec myéline (conduction saltatoire).
+  </div>
+
+  <div class="def">
+    <strong>Synapse :</strong> zone de transmission entre 2 neurones. Libération de neurotransmetteurs (acétylcholine, dopamine, sérotonine, GABA, glutamate) dans la fente synaptique → fixation sur récepteurs post-synaptiques.
+  </div>
+
+  <div class="mnemo">
+    <p>Neurotransmetteurs : <span class="acro">«&nbsp;GADS&nbsp;»</span><br>
+    → <strong>G</strong>ABA (inhibiteur) · <strong>A</strong>cétylcholine · <strong>D</strong>opamine · <strong>S</strong>érotonine</p>
+  </div>
+
+  <h3>Arc réflexe <span class="level-1ere">1ère</span></h3>
+  <div class="schema">
+    <pre>
+Stimulus → Récepteur sensoriel → Nerf afférent → Centre intégrateur (moelle)
+                                                          │
+                                              Nerf efférent → Effecteur (muscle)
+    </pre>
+  </div>
+
+  <h3>Pathologies neurologiques <span class="level-term">Terminale</span></h3>
+  <div class="grid-2">
+    <div class="mini-card">
+      <h4>AVC (Accident Vasculaire Cérébral)</h4>
+      <p><strong>Ischémique</strong> (80%) : occlusion artérielle → FAST (Face-Arm-Speech-Time). <strong>Hémorragique</strong> (20%) : rupture vasculaire. Urgence absolue : fenêtre thérapeutique 4h30 pour thrombolyse.</p>
+    </div>
+    <div class="mini-card">
+      <h4>Maladie d'Alzheimer</h4>
+      <p>Démence neurodégénérative. Plaques amyloïdes (βA4) + dégénérescences neurofibrillaires (Tau). Déficit en acétylcholine. Traitement : inhibiteurs de l'acétylcholinestérase.</p>
+    </div>
+    <div class="mini-card">
+      <h4>Sclérose en plaques (SEP)</h4>
+      <p>Maladie auto-immune démyélinisante du SNC. Évolution par poussées-rémissions (ou progressive). IRM : plaques de démyélinisation. Femmes 20-40 ans.</p>
+    </div>
+    <div class="mini-card">
+      <h4>Épilepsie</h4>
+      <p>Décharges neuronales synchrones anormales. Crises généralisées (tonico-cloniques) ou focales. Traitement antiépileptique au long cours.</p>
+    </div>
+  </div>
+
+  <div class="mnemo">
+    <p>Symptômes AVC : <span class="acro">«&nbsp;VITE&nbsp;»</span><br>
+    → <strong>V</strong>isage asymétrique · <strong>I</strong>mpossible de lever les bras · <strong>T</strong>rouble de la parole · <strong>E</strong>urgence — appel 15</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     9. SYSTÈME ENDOCRINIEN
+════════════════════════════════════════════════ -->
+<section id="endocrino">
+  <h2><span class="icon">⚗️</span> Système Endocrinien <span class="level-both">1ère + Term.</span></h2>
+
+  <div class="def">
+    <strong>Hormone :</strong> messager chimique sécrété par une glande endocrine dans le sang → action sur un organe cible (récepteurs spécifiques). Régulation par rétrocontrôle (feedback négatif +++).
+  </div>
+
+  <div class="schema">
+    <pre>
+AXE HYPOTHALAMO-HYPOPHYSAIRE
+┌───────────────┐
+│  HYPOTHALAMUS │ → libérines (+) et statines (-) → régule l'hypophyse
+└───────┬───────┘
+        │
+┌───────▼───────────────────────────────────────────┐
+│  HYPOPHYSE (antérieure / postérieure)              │
+│  Ante : GH · TSH · ACTH · FSH · LH · Prolactine  │
+│  Post : ADH (vasopressine) · Ocytocine            │
+└───────┬───────────────────────────────────────────┘
+        │
+   Glandes cibles  → Hormones effectrices → Rétrocontrôle sur hypothalamus
+    </pre>
+  </div>
+
+  <h3>Principales glandes et hormones <span class="level-1ere">1ère</span></h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Glande</th><th>Hormone</th><th>Rôle principal</th></tr>
+      <tr><td>Hypophyse ant.</td><td>GH (STH)</td><td>Croissance osseuse et musculaire</td></tr>
+      <tr><td>Thyroïde</td><td>T3, T4 (thyroxine)</td><td>Métabolisme basal, croissance, thermogenèse</td></tr>
+      <tr><td>Thyroïde (cellules C)</td><td>Calcitonine</td><td>↓ calcémie (inhibe ostéoclastes)</td></tr>
+      <tr><td>Parathyroïdes</td><td>PTH</td><td>↑ calcémie (stimule ostéoclastes + réabs. rénale)</td></tr>
+      <tr><td>Pancréas (β)</td><td>Insuline</td><td>↓ glycémie (entrée glucose dans cellules)</td></tr>
+      <tr><td>Pancréas (α)</td><td>Glucagon</td><td>↑ glycémie (glycogénolyse)</td></tr>
+      <tr><td>Surrénales (cortex)</td><td>Cortisol, aldostérone</td><td>Stress, Na⁺/K⁺, glycémie</td></tr>
+      <tr><td>Surrénales (médulla)</td><td>Adrénaline, norAdrénaline</td><td>Réponse aiguë au stress</td></tr>
+      <tr><td>Gonades</td><td>Œstrogènes, progestérone, testostérone</td><td>Reproduction, caractères sexuels secondaires</td></tr>
+    </table>
+  </div>
+
+  <h3>Régulation de la glycémie <span class="level-term">Terminale</span></h3>
+  <div class="schema">
+    <pre>
+Repas → ↑ Glycémie (> 1 g/L)
+                    │
+           Cellules β pancréas → ↑ Insuline
+                    │
+         ┌──────────┼──────────┐
+         ▼          ▼          ▼
+  Foie (glycogéno-  Muscles  Tissu adipeux
+   génèse)        (captage)  (stockage AG)
+                    │
+           → Glycémie revient à 1 g/L
+
+Jeûne → ↓ Glycémie (< 0,8 g/L)
+         Cellules α → ↑ Glucagon → Glycogénolyse hépatique → ↑ Glycémie
+    </pre>
+  </div>
+
+  <h3>Diabète sucré <span class="level-term">Terminale</span></h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th></th><th>Diabète type 1 (DT1)</th><th>Diabète type 2 (DT2)</th></tr>
+      <tr><td><strong>Mécanisme</strong></td><td>Destruction auto-immune des cellules β → carence absolue en insuline</td><td>Insulinorésistance + insuffisance relative en insuline</td></tr>
+      <tr><td><strong>Terrain</strong></td><td>Sujet jeune, mince, brutal</td><td>Sujet âgé/adulte, surpoids, progressif</td></tr>
+      <tr><td><strong>Traitement</strong></td><td>Insulinothérapie obligatoire</td><td>Hygiène de vie, ADO, insuline si nécessaire</td></tr>
+      <tr><td><strong>Complications</strong></td><td colspan="2">Rétinopathie, néphropathie, neuropathie (microangiopathie) + IDM, AVC (macroangiopathie)</td></tr>
+    </table>
+  </div>
+
+  <div class="mnemo">
+    <p>Complications chroniques du diabète : <span class="acro">«&nbsp;RNN-Mac&nbsp;»</span><br>
+    → <strong>R</strong>étinopathie · <strong>N</strong>éphropathie · <strong>N</strong>europathie (micro) + <strong>Mac</strong>roangiopathie</p>
+  </div>
+
+  <h3>Dysthyroïdies <span class="level-term">Terminale</span></h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th></th><th>Hypothyroïdie</th><th>Hyperthyroïdie</th></tr>
+      <tr><td>TSH</td><td>↑ (hypophyse stimule)</td><td>↓ (rétrocontrôle)</td></tr>
+      <tr><td>T3/T4</td><td>↓</td><td>↑</td></tr>
+      <tr><td>Signes</td><td>Fatigue, prise de poids, bradycardie, frilosité</td><td>Amaigrissement, tachycardie, nervosité, chaleur</td></tr>
+      <tr><td>Cause fréq.</td><td>Thyroïdite d'Hashimoto (auto-immune)</td><td>Maladie de Basedow (auto-immune)</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     10. REPRODUCTION
+════════════════════════════════════════════════ -->
+<section id="repro">
+  <h2><span class="icon">🌱</span> Reproduction et Développement <span class="level-both">1ère + Term.</span></h2>
+
+  <h3>Appareil reproducteur féminin <span class="level-1ere">1ère</span></h3>
+  <div class="schema">
+    <pre>
+Ovaires (x2) → production ovules + hormones (œstrogènes, progestérone)
+    │
+Trompes de Fallope (salpinx) → lieu de la fécondation
+    │
+Utérus → nidation de l'embryon (endomètre)
+    │
+Col de l'utérus
+    │
+Vagin
+    </pre>
+  </div>
+
+  <h3>Cycle ovarien et utérin (28 jours) <span class="level-term">Terminale</span></h3>
+  <div class="schema">
+    <pre>
+J1────────────J14─────────────────J28
+│  Folliculaire │   Ovulation   │  Lutéale
+│  Œstrogènes ↑ │ Pic LH → ovul.│  Progestérone ↑ (corps jaune)
+│  Endomètre ↑  │               │  Si pas fécondation → menstrues J28
+│               │               │  Si fécondation → HCG ↑ → corps jaune persiste
+    </pre>
+  </div>
+
+  <h3>Fécondation et développement embryonnaire <span class="level-1ere">1ère</span></h3>
+  <div class="schema">
+    <pre>
+Spermatozoïde + Ovule → Zygote (2n) [dans trompe]
+    │
+    ▼ Segmentation (divisions rapides)
+Morula → Blastocyste → Nidation (J6-J7)
+    │                    dans endomètre
+    ▼
+Embryon → (8 sem) → Fœtus → (38-40 sem) → Naissance
+
+Feuillets embryonnaires :
+  Ectoderme → peau, système nerveux
+  Mésoderme → muscles, squelette, cœur, reins
+  Endoderme → tube digestif, poumons
+    </pre>
+  </div>
+
+  <div class="mnemo">
+    <p>Feuillets : <span class="acro">«&nbsp;EME&nbsp;»</span> → <strong>E</strong>ctoderme · <strong>M</strong>ésoderme · <strong>E</strong>ndoderme<br>
+    Moyen : <em>«&nbsp;Les feuilles de l'arbre de la vie poussent de l'extérieur vers l'intérieur&nbsp;»</em> (Ecto = externe, Endo = interne).</p>
+  </div>
+
+  <h3>Contraception <span class="level-term">Terminale</span></h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Méthode</th><th>Mécanisme</th><th>Indice Pearl</th></tr>
+      <tr><td>Pilule combinée</td><td>Inhibe ovulation (œstro + progestérone)</td><td>&lt; 0,3</td></tr>
+      <tr><td>Pilule microprogestative</td><td>Glaire cervicale épaissie, ovulation variable</td><td>&lt; 1</td></tr>
+      <tr><td>DIU cu (stérilet)</td><td>Toxique pour spermatozoïdes, anti-nidation</td><td>0,6–0,8</td></tr>
+      <tr><td>Préservatif masculin</td><td>Barrière mécanique</td><td>2 (usage parfait)</td></tr>
+      <tr><td>Contraception d'urgence</td><td>Lévonorgestrel forte dose (délai 72 h)</td><td>—</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     11. SYSTÈME RÉNAL
+════════════════════════════════════════════════ -->
+<section id="renal">
+  <h2><span class="icon">💧</span> Système Rénal et Équilibre Hydro-électrolytique <span class="level-term">Terminale</span></h2>
+
+  <h3>Structure du rein et néphron</h3>
+  <div class="schema">
+    <pre>
+REIN
+├── Cortex (glomérules + tubules contournés)
+└── Médulla (anses de Henle + tubes collecteurs)
+
+NÉPHRON (unité fonctionnelle, 1 million / rein) :
+Glomérule de Malpighi
+  ↓ Filtration (ultrafiltrat plasmatique)
+Capsule de Bowman
+  ↓
+Tube contourné proximal (TCP) → Réabsorption : glucose, AA, Na⁺, eau (70%)
+  ↓
+Anse de Henle → Gradient osmotique médullaire
+  ↓
+Tube contourné distal (TCD) → Réabsorption Na⁺ (aldostérone), eau (ADH)
+  ↓
+Tube collecteur → Urine finale (concentration)
+  ↓
+Pelvis rénal → Uretère → Vessie → Urètre → Miction
+    </pre>
+  </div>
+
+  <div class="def">
+    <strong>DFG (Débit de Filtration Glomérulaire) :</strong> volume filtré / min. Valeur normale : ~120 mL/min. Marqueur de la fonction rénale (créatinine, cystatine C).
+  </div>
+
+  <h3>Régulations rénales</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Hormone</th><th>Action rénale</th><th>Effet final</th></tr>
+      <tr><td>ADH (vasopressine)</td><td>↑ perméabilité tube collecteur à l'eau</td><td>↓ diurèse, ↑ osmolarité urine</td></tr>
+      <tr><td>Aldostérone</td><td>↑ réabsorption Na⁺ + excrétion K⁺ (TCD)</td><td>↑ volémie, ↑ PA</td></tr>
+      <tr><td>ANF (facteur natriurétique)</td><td>↑ excrétion Na⁺</td><td>↓ PA, ↓ volémie</td></tr>
+      <tr><td>PTH</td><td>↑ réabsorption Ca²⁺, ↓ phosphate</td><td>↑ calcémie</td></tr>
+    </table>
+  </div>
+
+  <h3>Insuffisance rénale chronique (IRC) <span class="level-term">Terminale</span></h3>
+  <div class="def">
+    DFG &lt; 60 mL/min/1,73 m² depuis &gt; 3 mois. 5 stades (G1 à G5). Au stade 5 (DFG &lt; 15) : dialyse ou transplantation. Causes : diabète, HTA, glomérulonéphrites.
+  </div>
+
+  <div class="mnemo">
+    <p>Complications de l'IRC : <span class="acro">«&nbsp;AHEAD&nbsp;»</span><br>
+    → <strong>A</strong>némie · <strong>H</strong>yperphosphorémie · <strong>E</strong>au (surcharge) · <strong>A</strong>cidose · <strong>D</strong>ysfonction cardiovasculaire</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     12. OS, MUSCLES ET LOCOMOTION
+════════════════════════════════════════════════ -->
+<section id="os">
+  <h2><span class="icon">🦴</span> Système Ostéo-articulaire et Musculaire <span class="level-both">1ère + Term.</span></h2>
+
+  <h3>Structure de l'os <span class="level-1ere">1ère</span></h3>
+  <div class="schema">
+    <pre>
+OS LONG (ex. fémur) :
+Épiphyse — Métaphyse — Diaphyse — Métaphyse — Épiphyse
+             │               │
+         Cartilage       Os compact (ostéons)
+         de conjugaison  Os spongieux (travées)
+                         Canal médullaire (moelle osseuse)
+                         Périoste (gaine externe)
+
+Cellules osseuses :
+  Ostéoblastes → formation os (synthèse collagène + minéralisation)
+  Ostéoclastes → résorption os (dissolution par HCl + enzymes)
+  Ostéocytes   → maintien de la matrice
+    </pre>
+  </div>
+
+  <h3>Contraction musculaire <span class="level-1ere">1ère</span></h3>
+  <div class="schema">
+    <pre>
+Influx nerveux → Plaque motrice → Libération ACh
+                                        │
+                             Récepteurs nicotiniques
+                                        │
+                          Potentiel d'action musculaire
+                                        │
+                          Libération Ca²⁺ (réticulum sarcoplasmique)
+                                        │
+                          Fixation Ca²⁺ sur troponine
+                                        │
+                          Glissement actine / myosine (ATP)
+                                        │
+                              RACCOURCISSEMENT (contraction)
+    </pre>
+  </div>
+
+  <div class="mnemo">
+    <p>Étapes contraction : <span class="acro">«&nbsp;Le Chat Peut Courir Très Loin&nbsp;»</span><br>
+    → influx → <strong>L</strong>ibération ACh → <strong>C</strong>a²⁺ → <strong>P</strong>otentiel d'action → <strong>C</strong>a²⁺ sur troponine → <strong>T</strong>ête myosine → <strong>G</strong>lissement</p>
+  </div>
+
+  <h3>Pathologies ostéo-articulaires <span class="level-term">Terminale</span></h3>
+  <div class="grid-2">
+    <div class="mini-card">
+      <h4>Ostéoporose</h4>
+      <p>Diminution de la densité minérale osseuse (DMO). Risque fracturaire ↑ (col du fémur, vertèbres, poignet). Post-ménopause (carence en œstrogènes) et homme âgé. Prévention : Ca²⁺, vitamine D, activité physique.</p>
+    </div>
+    <div class="mini-card">
+      <h4>Arthrose</h4>
+      <p>Dégradation du cartilage articulaire (mécanique, non inflammatoire). Douleur mécanique, raideur. Articulations portantes. Traitement symptomatique : AINS, injections, chirurgie.</p>
+    </div>
+    <div class="mini-card">
+      <h4>Polyarthrite rhumatoïde</h4>
+      <p>Maladie auto-immune inflammatoire des articulations (synovite). Déformations, destruction osseuse. Traitement : AINS, méthotrexate, biothérapies (anti-TNFα).</p>
+    </div>
+    <div class="mini-card">
+      <h4>Fractures et réparation</h4>
+      <p>1. Hématome fracturaire → 2. Cal cartilagineux → 3. Cal osseux → 4. Remodelage. Dure 4-6 semaines (jeune) à plusieurs mois (âgé).</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     13. GRANDES PATHOLOGIES TERMINALE
+════════════════════════════════════════════════ -->
+<section id="patho">
+  <h2><span class="icon">⚠️</span> Grandes Physiopathologies — Récapitulatif <span class="level-term">Terminale</span></h2>
+
+  <h3>Cancer <span class="level-term">Terminale</span></h3>
+  <div class="def">
+    <strong>Cancer :</strong> prolifération incontrôlée de cellules issues d'une mutation (oncogènes activés / gènes suppresseurs de tumeurs inactivés). La cellule échappe à l'apoptose et à l'immunosurveillance.
+  </div>
+  <div class="schema">
+    <pre>
+Mutation initiatrice → Promotion → Progression → Tumeur maligne
+        │                                               │
+    (oncogène)                              Métastases (dissémination
+    (anti-oncogène)                         lymphatique ou sanguine)
+
+Traitements : chirurgie · radiothérapie · chimiothérapie · immunothérapie · thérapies ciblées
+    </pre>
+  </div>
+
+  <div class="mnemo">
+    <p>Caractéristiques des cellules cancéreuses : <span class="acro">«&nbsp;PRIMA&nbsp;»</span><br>
+    → <strong>P</strong>rolifération incontrôlée · <strong>R</strong>ésistance à l'apoptose · <strong>I</strong>nvasion tissus · <strong>M</strong>étastases · <strong>A</strong>ngiogenèse</p>
+  </div>
+
+  <h3>Maladies infectieuses <span class="level-term">Terminale</span></h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Agent</th><th>Exemples</th><th>Traitement</th></tr>
+      <tr><td>Bactérie</td><td>Tuberculose, pneumocoque, staphylocoque</td><td>Antibiotiques (selon antibiogramme)</td></tr>
+      <tr><td>Virus</td><td>VIH, hépatites, grippe, SARS-CoV-2</td><td>Antiviraux, vaccins</td></tr>
+      <tr><td>Champignon (fungi)</td><td>Candidose, aspergilllose</td><td>Antifongiques (azolés, amphotéricine B)</td></tr>
+      <tr><td>Parasite</td><td>Paludisme (Plasmodium), toxoplasmose</td><td>Antiparasitaires (chloroquine, atovaquone)</td></tr>
+      <tr><td>Prion</td><td>MCJ, maladie de la vache folle</td><td>Aucun traitement efficace</td></tr>
+    </table>
+  </div>
+
+  <h3>VIH / SIDA <span class="level-term">Terminale</span></h3>
+  <div class="schema">
+    <pre>
+VIH (rétrovirus) → Cible LT CD4+
+  │
+  ▼
+Réplication virale → Destruction progressive LT CD4+
+  │
+  ▼
+CD4 < 200/mm³ → SIDA (Syndrome d'Immuno-Déficience Acquise)
+  │
+  ▼
+Infections opportunistes (pneumocystose, toxoplasmose cérébrale…)
+
+Traitement : ARV (antirétroviraux) — trithérapie → charge virale indétectable
+    </pre>
+  </div>
+
+  <h3>Obésité et syndrome métabolique <span class="level-term">Terminale</span></h3>
+  <div class="def">
+    <strong>Obésité :</strong> IMC ≥ 30 kg/m². Obésité abdominale (tour de taille H &gt; 102 cm, F &gt; 88 cm).
+    <strong>Syndrome métabolique :</strong> association de : obésité abdominale + HTA + hyperglycémie + dyslipidémie → ↑↑ risque cardiovasculaire et DT2.
+  </div>
+
+  <div class="mnemo">
+    <p>IMC = <span class="acro">Poids (kg) / Taille² (m)</span><br>
+    Catégories : &lt;18,5 maigreur · 18,5–25 normal · 25–30 surpoids · 30–35 obésité modérée · &gt;35 obésité sévère · &gt;40 obésité massive (morbide)</p>
+  </div>
+
+  <h3>Récapitulatif — Facteurs de risque communs</h3>
+  <div class="schema">
+    <pre>
+┌──────────────────────────────────────────────────────────┐
+│              FACTEURS DE RISQUE MODIFIABLES              │
+├──────────────┬───────────────────────────────────────────┤
+│ Tabac        │ Cancer, BPCO, IDM, AVC, AOMI              │
+│ Alcool       │ Cirrhose, cancer, HTA, neuropathie        │
+│ Sédentarité  │ Obésité, DT2, maladies CV                 │
+│ Alimentation │ Obésité, DT2, dyslipidémie, cancer colo   │
+│ Stress       │ HTA, ulcère, dépression                   │
+│ HTA          │ IDM, AVC, IRC                             │
+├──────────────┴───────────────────────────────────────────┤
+│           FACTEURS NON MODIFIABLES                       │
+│ Âge · Sexe · Génétique / antécédents familiaux          │
+└──────────────────────────────────────────────────────────┘
+    </pre>
+  </div>
+
+  <h3>Lexique essentiel — Termes médicaux</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Terme</th><th>Définition</th></tr>
+      <tr><td>Homéostasie</td><td>Maintien de la constance du milieu intérieur</td></tr>
+      <tr><td>Ischémie</td><td>Défaut d'apport sanguin (et donc d'O₂) à un tissu</td></tr>
+      <tr><td>Nécrose</td><td>Mort cellulaire pathologique avec inflammation</td></tr>
+      <tr><td>Apoptose</td><td>Mort cellulaire programmée (physiologique)</td></tr>
+      <tr><td>Inflammation</td><td>Réponse non spécifique à une agression (rougeur, chaleur, douleur, œdème)</td></tr>
+      <tr><td>Fibrose</td><td>Remplacement d'un tissu fonctionnel par du tissu conjonctif cicatriciel</td></tr>
+      <tr><td>Œdème</td><td>Accumulation de liquide dans l'espace interstitiel</td></tr>
+      <tr><td>Dyspnée</td><td>Sensation subjective de difficulté respiratoire</td></tr>
+      <tr><td>Dysphagie</td><td>Difficulté à avaler</td></tr>
+      <tr><td>Tachycardie</td><td>FC &gt; 100 bpm</td></tr>
+      <tr><td>Bradycardie</td><td>FC &lt; 60 bpm</td></tr>
+      <tr><td>Hyper / Hypo</td><td>Au-dessus / En-dessous de la normale</td></tr>
+      <tr><td>-ite</td><td>Inflammation (arthrite, hépatite, méningite…)</td></tr>
+      <tr><td>-ose</td><td>Processus pathologique dégénératif (arthrose, cirrhose…)</td></tr>
+      <tr><td>-ectomie</td><td>Ablation chirurgicale (appendicectomie…)</td></tr>
+      <tr><td>-plasie</td><td>Formation / développement (dysplasie, hyperplasie)</td></tr>
+    </table>
+  </div>
+
+  <div class="mnemo">
+    <p>Les 4 signes cardinaux de l'inflammation : <span class="acro">«&nbsp;RCDC&nbsp;»</span> (ou en latin <em>CRDO</em>)<br>
+    → <strong>R</strong>ougeur · <strong>C</strong>haleur · <strong>D</strong>ouleur · <strong>O</strong>edème (gonflement)<br>
+    Latin : <em>Rubor · Calor · Dolor · Tumor</em></p>
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  <p>🌸 Biologie &amp; Physiopathologie ST2S — Programme <span>1ère</span> et <span>Terminale</span> 🌸</p>
+  <p style="margin-top:0.4rem; opacity:0.6;">Document de révision complet · Copiez ce fichier HTML dans votre dépôt GitHub</p>
+</footer>
+
+</body>
+</html>
